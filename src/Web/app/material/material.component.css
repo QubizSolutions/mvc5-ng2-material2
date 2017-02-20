@@ -1,0 +1,23 @@
+﻿.example-card {
+  width: 400px;
+}
+
+.example-header-image {
+  background-image: url('http://vignette1.wikia.nocookie.net/marvelcinematicuniverse/images/0/06/Avengers_Tesseract2012.png/revision/latest?cb=20140128210835');
+  background-size: cover;
+}
+
+.example-h2 {
+  margin: 10px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
