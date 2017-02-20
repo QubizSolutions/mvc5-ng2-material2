@@ -1,56 +1,112 @@
-﻿<md-card class="example-card">
-    <md-card-header>
-        <div md-card-avatar class="example-header-image"></div>
-        <md-card-title>Card</md-card-title>
-        <md-card-subtitle>Tesseract</md-card-subtitle>
-    </md-card-header>
-    <img md-card-image src="http://vignette1.wikia.nocookie.net/marvelcinematicuniverse/images/0/06/Avengers_Tesseract2012.png/revision/latest?cb=20140128210835">
-    <md-card-content>
-        <p>
-            The Tesseract (also called the Cube) is a crystalline cube-shaped containment vessel for an Infinity Stone, one of six singularities that predate the universe and possesses unlimited energy. Once the universe came into existence, it changed form to a stone. It was used by various ancient civilizations before coming into Asgardian hands who brought it to Earth. After the Battle of New York, it was returned to Asgard. The Tesseract contains the Space Stone.
-        </p>
-    </md-card-content>
-    <md-card-actions>
-        <button md-button>LIKE</button>
-        <button md-button>SHARE</button>
-    </md-card-actions>
-</md-card>
-<md-card>
-    <md-card-content>
-        <h2 class="example-h2">Checkbox configuration</h2>
+﻿<div class="material-example">
+    <md-card class="example-card">
+        <span>For more exapmles click <a href="https://material.angular.io/components">here</a></span>
+    </md-card>
+    <md-card class="example-card">
+        <md-card-header>
+            <div md-card-avatar class="example-header-image"></div>
+            <md-card-title>Card</md-card-title>
+            <md-card-subtitle>Tesseract</md-card-subtitle>
+        </md-card-header>
+        <md-card-content>
+            <p>
+                The Tesseract (also called the Cube) is a crystalline cube-shaped containment vessel for an Infinity Stone, one of six singularities that predate the universe and possesses unlimited energy. Once the universe came into existence, it changed form to a stone. It was used by various ancient civilizations before coming into Asgardian hands who brought it to Earth. After the Battle of New York, it was returned to Asgard. The Tesseract contains the Space Stone.
+            </p>
+        </md-card-content>
+        <md-card-actions>
+            <button md-button>LIKE</button>
+            <button md-button>SHARE</button>
+        </md-card-actions>
+    </md-card>
+    <md-card class="example-card">
+        <md-card-content>
+            <h2 class="example-h2">Checkbox configuration</h2>
 
-        <section class="example-section">
-            <md-checkbox class="example-margin" [(ngModel)]="checked">Checked</md-checkbox>
-            <md-checkbox class="example-margin" [(ngModel)]="indeterminate">Indeterminate</md-checkbox>
-        </section>
+            <section class="example-section">
+                <md-checkbox class="example-margin" [(ngModel)]="checked">Checked</md-checkbox>
+                <md-checkbox class="example-margin" [(ngModel)]="indeterminate">Indeterminate</md-checkbox>
+            </section>
 
-        <section class="example-section">
-            <label class="example-margin">Align:</label>
-            <md-radio-group [(ngModel)]="align">
-                <md-radio-button class="example-margin" value="start">Start</md-radio-button>
-                <md-radio-button class="example-margin" value="end">End</md-radio-button>
-            </md-radio-group>
-        </section>
+            <section class="example-section">
+                <label class="example-margin">Align:</label>
+                <md-radio-group [(ngModel)]="align">
+                    <md-radio-button class="example-margin" value="start">Start</md-radio-button>
+                    <md-radio-button class="example-margin" value="end">End</md-radio-button>
+                </md-radio-group>
+            </section>
 
-        <section class="example-section">
-            <md-checkbox class="example-margin" [(ngModel)]="disabled">Disabled</md-checkbox>
-        </section>
-    </md-card-content>
-</md-card>
+            <section class="example-section">
+                <md-checkbox class="example-margin" [(ngModel)]="disabled">Disabled</md-checkbox>
+            </section>
+            <h2 class="example-h2">Result</h2>
 
-<md-card class="result">
-    <md-card-content>
-        <h2 class="example-h2">Result</h2>
+            <section class="example-section">
+                <md-checkbox class="example-margin"
+                             [checked]="checked"
+                             [indeterminate]="indeterminate"
+                             [align]="align"
+                             [disabled]="disabled">
+                    I'm a checkbox
+                </md-checkbox>
+            </section>
+        </md-card-content>
+    </md-card>
+    <md-card>
+        <md-card-header>
+            <md-card-title>Inputs</md-card-title>
+        </md-card-header>
+        <md-card-content>
+            <form class="example-form">
+                <md-input-container class="example-full-width">
+                    <input mdInput placeholder="Company (disabled)" disabled value="Google">
+                </md-input-container>
 
-        <section class="example-section">
-            <md-checkbox class="example-margin"
-                         [checked]="checked"
-                         [indeterminate]="indeterminate"
-                         [align]="align"
-                         [disabled]="disabled">
-                I'm a checkbox
-            </md-checkbox>
-        </section>
-    </md-card-content>
-</md-card>
+                <table class="example-full-width" cellspacing="0">
+                    <tr>
+                        <td>
+                            <md-input-container class="example-full-width">
+                                <input mdInput placeholder="First name">
+                            </md-input-container>
+                        </td>
+                        <td>
+                            <md-input-container class="example-full-width">
+                                <input mdInput placeholder="Long Last Name That Will Be Truncated">
+                            </md-input-container>
+                        </td>
+                    </tr>
+                </table>
 
+                <p>
+                    <md-input-container class="example-full-width">
+                        <textarea mdInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+                    </md-input-container>
+                    <md-input-container class="example-full-width">
+                        <textarea mdInput placeholder="Address 2"></textarea>
+                    </md-input-container>
+                </p>
+
+                <table class="example-full-width" cellspacing="0">
+                    <tr>
+                        <td>
+                            <md-input-container class="example-full-width">
+                                <input mdInput placeholder="City">
+                            </md-input-container>
+                        </td>
+                        <td>
+                            <md-input-container class="example-full-width">
+                                <input mdInput placeholder="State">
+                            </md-input-container>
+                        </td>
+                        <td>
+                            <md-input-container class="example-full-width">
+                                <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+                                <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+                            </md-input-container>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </md-card-content>
+    </md-card>
+
+</div>

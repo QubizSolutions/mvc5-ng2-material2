@@ -8,7 +8,6 @@ import { MaterialModule } from '@angular/material';
 
 //Modules
 import { HomeModule } from './home/home.module';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { MaterialModule as MyMaterialModule } from './material/material.module';
 import { AuthorModule } from './author/author.module';
 
@@ -24,7 +23,6 @@ import { MenuComponent } from './menu/menu.component'
         FormsModule,
         MaterialModule.forRoot(),
         HomeModule,
-        DashboardModule,
         MyMaterialModule,
         AuthorModule
     ],

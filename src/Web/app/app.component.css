@@ -1,6 +1,20 @@
-﻿@media (max-width: 767px) {
-    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
-    .body-content {
-        padding-top: 50px;
-    }
+﻿.app-component {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.app-content{
+    flex: 1;
+    background-color: lightgray;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
 }

@@ -14,8 +14,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Web</RootNamespace>
-    <AssemblyName>Web</AssemblyName>
+    <RootNamespace>Tesseract.Web</RootNamespace>
+    <AssemblyName>Tesseract.Web</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -194,16 +194,12 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -211,7 +207,6 @@
     <Content Include="app\app.component.css" />
     <Content Include="app\app.component.html" />
     <Content Include="app\author\author.component.html" />
-    <Content Include="app\dashboard\dashboard.component.html" />
     <Content Include="app\home\home.component.html" />
     <Content Include="app\material\material.component.css" />
     <Content Include="app\material\material.component.html" />
@@ -271,10 +266,12 @@
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
-    <TypeScriptCompile Include="app\author\author.component.ts" />
+    <TypeScriptCompile Include="app\common\common.interface.ts" />
+    <TypeScriptCompile Include="app\common\common.module.ts" />
+    <TypeScriptCompile Include="app\common\helpers\http-utility.service.ts" />
     <TypeScriptCompile Include="app\author\author.module.ts" />
-    <TypeScriptCompile Include="app\dashboard\dashboard.module.ts" />
-    <TypeScriptCompile Include="app\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="app\author\author.component.ts" />
+    <TypeScriptCompile Include="app\author\author.service.ts" />
     <TypeScriptCompile Include="app\home\home.module.ts" />
     <TypeScriptCompile Include="app\home\home.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />

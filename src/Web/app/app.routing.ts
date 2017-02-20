@@ -2,7 +2,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { MaterialComponent } from './material/material.component';
 import { AuthorComponent } from './author/author.component';
 
@@ -17,15 +16,11 @@ const appRoutes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'dashboard',
-        component: DashboardComponent
-    },
-    {
         path: 'material',
         component: MaterialComponent
     },
     {
-        path: 'author',
+        path: 'authors',
         component: AuthorComponent
     }
 ];

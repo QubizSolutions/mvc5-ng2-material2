@@ -1,10 +1,40 @@
-﻿<div class='container-fluid'>
-    <div class='row'>
-        <div class='col-sm-3'>
-            <tesseract-menu></tesseract-menu>
-        </div>
-        <div class='col-sm-9 body-content'>
+﻿<div class="app-component">
+    <md-toolbar color="primary">
+        <button md-button (click)="sidenav.toggle()">
+            <md-icon>menu</md-icon>
+        </button>
+        <span>MVC5 - Angular 2 - Material</span>
+        <span class="example-spacer"></span>
+        <md-icon class="example-icon">verified_user</md-icon>
+    </md-toolbar>
+    <md-sidenav-container class="app-content example-sidenav-fab-container">
+        <md-sidenav #sidenav mode="over" opened="false">
+            <ul class="nav navbar-nav">
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/home']" (click)="sidenav.close()">
+                        <span class='glyphicon glyphicon-home'></span> Home
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/authors']" (click)="sidenav.close()">
+                        <span class='glyphicon glyphicon-education'></span> Authors
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/material']" (click)="sidenav.close()">
+                        <span class='glyphicon glyphicon-education'></span> Material
+                    </a>
+                </li>
+            </ul>
+        </md-sidenav>
+        <div class="col-sm-12 body-content">
             <router-outlet></router-outlet>
         </div>
-    </div>
+    </md-sidenav-container>
+    <md-toolbar>
+        <a href="https://github.com/QubizSolutions"><span>QubizSolutions</span></a>
+        <span class="example-spacer"></span>
+        <a href="http://qubiz.com/"><img src="https://qubiz.com/wp-content/uploads/2016/12/Logo_header-3.png" alt="Qubiz"></a>
+    </md-toolbar>
 </div>
+
