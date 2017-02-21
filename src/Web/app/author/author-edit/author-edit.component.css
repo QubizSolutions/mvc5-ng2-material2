@@ -1,0 +1,14 @@
+﻿.dialog-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.dialog-action{
+    margin-left: 10px;
+}

@@ -1,14 +1,14 @@
 ﻿export interface Author {
-    Id: number,
+    Id: string,
     FirstName: string,
     LastName: string,
-    BirthDate: Date,
+    BirthDate: any,
     Country: string,
-    Articles: Article[]
+    Articles?: Article[]
 }
 
 export interface Article {
-    Id: number,
+    Id: string,
     Title: string,
     ShortDescription: string,
     Year: number,

@@ -7,7 +7,7 @@ namespace Tesseract.Api.Models
 {
     public class Article
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Title { get; set; }
 
@@ -17,6 +17,6 @@ namespace Tesseract.Api.Models
 
         public string Link { get; set; }
 
-        public Dictionary<int, string> Authors { get; set; }
+        public Dictionary<Guid, string> Authors { get; set; }
     }
 }

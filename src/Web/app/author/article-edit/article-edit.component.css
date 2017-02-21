@@ -1,0 +1,31 @@
+﻿.article-card{
+    margin-bottom: 15px;
+}
+.author-chip-list{
+    min-height: 50px;
+}
+.author-chip{
+    margin-top: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.chip-content{
+    display: flex;
+    align-items: center;
+}
+
+.dialog-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.dialog-action{
+    margin-left: 10px;
+}

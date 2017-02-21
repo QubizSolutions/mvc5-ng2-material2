@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { MaterialComponent } from './material/material.component';
 import { AuthorComponent } from './author/author.component';
 import { AuthorDetailComponent } from './author/author-detail/author-detail.component';
+import { ArticleDetailComponent } from './author/article-detail/article-detail.component';
 
 const appRoutes: Routes = [
     {
@@ -27,6 +28,10 @@ const appRoutes: Routes = [
     {
         path: 'author/:id',
         component: AuthorDetailComponent
+    },
+    {
+        path: 'article/:id',
+        component: ArticleDetailComponent
     }
 ];
 

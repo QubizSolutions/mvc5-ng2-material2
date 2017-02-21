@@ -5,7 +5,8 @@
                 <md-list-item>
                     <md-icon md-list-avatar>face</md-icon>
                     <h4 md-line>{{author.FirstName}} {{author.LastName}}</h4>
-                    <p md-line> {{author.BirthDate| date}} </p>
+                    <p md-line>{{author.BirthDate| date}}</p>
+                    <button md-mini-fab (click)="editAuthor(author.Id)"><md-icon>mode_edit</md-icon></button>
                 </md-list-item>
                 <md-list-item>
                     <md-icon md-list-avatar>pin_drop</md-icon>
@@ -15,9 +16,15 @@
                 <md-list-item>
                     <md-icon md-list-avatar>library_books</md-icon>
                     <h4 md-line>Articles:</h4>
-                    <p md-line>{{author.Articles.length}}</p>
+                    <p *ngIf="!author.Articles || author.Articles.length == 0" md-line>0</p>
+                    <md-chip-list md-line *ngIf="author.Articles && author.Articles.length > 0">
+                        <md-chip class="author-chip" *ngFor="let article of author.Articles" (click)="openArticleDetail(article.Id)">
+                            {{article.Title}}
+                        </md-chip>
+                    </md-chip-list>
                 </md-list-item>
             </md-list>
+            <button md-raised-button color="primary" (click)="addArticle()">Add article</button>
         </md-card-content>
     </md-card>
     <div *ngIf="author.Articles.length > 0">

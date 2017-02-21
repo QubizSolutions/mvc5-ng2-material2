@@ -13,7 +13,6 @@ import { AuthorModule } from './author/author.module';
 
 //Components
 import { AppComponent } from './app.component';
-import { MenuComponent } from './menu/menu.component'
 
 @NgModule({
     imports: [
@@ -27,7 +26,7 @@ import { MenuComponent } from './menu/menu.component'
         AuthorModule
     ],
     declarations: [
-        AppComponent, MenuComponent
+        AppComponent
     ],
     bootstrap: [AppComponent]
 })

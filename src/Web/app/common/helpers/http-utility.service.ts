@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class HttpUtilityService {
 
+    serverUrl = 'http://localhost/Tesseract.Api/';
+
     extractData(res: Response) {
         return res.json() || [];
     }
