@@ -22,7 +22,7 @@
     </md-card>
     <div *ngIf="author.Articles.length > 0">
         <h3>Articles</h3>
-        <md-card *ngFor="let article of author.Articles">
+        <md-card *ngFor="let article of author.Articles; let i = index" [class.article-card]="i < author.Articles.length - 1">
             <md-card-content>
                 <md-list>
                     <md-list-item>
