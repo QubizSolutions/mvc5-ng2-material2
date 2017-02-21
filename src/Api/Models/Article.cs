@@ -17,6 +17,6 @@ namespace Tesseract.Api.Models
 
         public string Link { get; set; }
 
-        public int[] AuthorIds { get; set; }
+        public Dictionary<int, string> Authors { get; set; }
     }
 }

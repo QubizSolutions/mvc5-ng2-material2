@@ -37,8 +37,8 @@ namespace Tesseract.Api.Controllers
                     BirthDate = new DateTime(1970,10,10), Country="US",
                     Articles = new Article[]
                     {
-                        new Article { Id = 1, Title ="I am Iron Man", ShortDescription="About Iron man", Link = "http://marvel.wikia.com/wiki/Iron_Man", Year = 2017, AuthorIds = new int[] { 1 } },
-                        new Article { Id = 1, Title ="The avengers", ShortDescription="The story of the avengers", Link = "http://marvel.wikia.com/wiki/Avengers", Year = 1995, AuthorIds = new int[] { 1, 2, 3 } }
+                        new Article { Id = 1, Title ="I am Iron Man", ShortDescription="About Iron man", Link = "http://marvel.wikia.com/wiki/Iron_Man", Year = 2017, Authors = new Dictionary<int, string> { { 1, "Tony Stark" } } },
+                        new Article { Id = 1, Title ="The avengers", ShortDescription="The story of the avengers", Link = "http://marvel.wikia.com/wiki/Avengers", Year = 1995, Authors = new Dictionary<int, string> { { 1, "Tony Stark" }, { 2, "Peter Parker" }, { 3, "Steve Rogers" } } }
                     }
                 },
                 new Author
@@ -48,8 +48,8 @@ namespace Tesseract.Api.Controllers
                     BirthDate = new DateTime(1993,10,10), Country="US",
                     Articles = new Article[]
                     {
-                        new Article { Id = 1, Title ="I am SpiderMan", ShortDescription="About Spider Man", Link = "http://marvel.wikia.com/wiki/Spider-Man", Year = 2017, AuthorIds = new int[] { 2 } },
-                        new Article { Id = 1, Title ="The avengers", ShortDescription="The story of the avengers", Link = "http://marvel.wikia.com/wiki/Avengers", Year = 1995, AuthorIds = new int[] { 1, 2, 3 } }
+                        new Article { Id = 1, Title ="I am SpiderMan", ShortDescription="About Spider Man", Link = "http://marvel.wikia.com/wiki/Spider-Man", Year = 2017, Authors = new Dictionary<int, string> { { 2, "Peter Parker" } } },
+                        new Article { Id = 1, Title ="The avengers", ShortDescription="The story of the avengers", Link = "http://marvel.wikia.com/wiki/Avengers", Year = 1995, Authors = new Dictionary<int, string> { { 1, "Tony Stark" }, { 2, "Peter Parker" }, { 3, "Steve Rogers" } } }
                     }
                 },
                 new Author
@@ -59,8 +59,8 @@ namespace Tesseract.Api.Controllers
                     BirthDate = new DateTime(1993,10,10), Country="US",
                     Articles = new Article[]
                     {
-                        new Article { Id = 1, Title ="I am Captain America", ShortDescription="About Spider Man", Link = "http://marvel.wikia.com/wiki/Captain_America", Year = 2017, AuthorIds = new int[] { 3 } },
-                        new Article { Id = 1, Title ="The avengers", ShortDescription="The story of the avengers", Link = "http://marvel.wikia.com/wiki/Avengers", Year = 1995, AuthorIds = new int[] { 1, 2, 3 } }
+                        new Article { Id = 1, Title ="I am Captain America", ShortDescription="About Spider Man", Link = "http://marvel.wikia.com/wiki/Captain_America", Year = 2017, Authors = new Dictionary<int, string> { { 3, "Steve Rogers"} } },
+                        new Article { Id = 1, Title ="The avengers", ShortDescription="The story of the avengers", Link = "http://marvel.wikia.com/wiki/Avengers", Year = 1995, Authors = new Dictionary<int, string> { { 1, "Tony Stark" }, { 2, "Peter Parker" }, { 3, "Steve Rogers" } } }
                     }
                 }
             };

@@ -206,6 +206,8 @@
   <ItemGroup>
     <Content Include="app\app.component.css" />
     <Content Include="app\app.component.html" />
+    <Content Include="app\author\author-detail\author-detail.component.css" />
+    <Content Include="app\author\author-detail\author-detail.component.html" />
     <Content Include="app\author\author.component.html" />
     <Content Include="app\home\home.component.html" />
     <Content Include="app\material\material.component.css" />
@@ -266,6 +268,7 @@
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
+    <TypeScriptCompile Include="app\author\author-detail\author-detail.component.ts" />
     <TypeScriptCompile Include="app\common\common.interface.ts" />
     <TypeScriptCompile Include="app\common\common.module.ts" />
     <TypeScriptCompile Include="app\common\helpers\http-utility.service.ts" />

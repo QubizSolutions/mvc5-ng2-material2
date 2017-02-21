@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MaterialComponent } from './material/material.component';
 import { AuthorComponent } from './author/author.component';
+import { AuthorDetailComponent } from './author/author-detail/author-detail.component';
 
 const appRoutes: Routes = [
     {
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
     {
         path: 'authors',
         component: AuthorComponent
+    },
+    {
+        path: 'author/:id',
+        component: AuthorDetailComponent
     }
 ];
 

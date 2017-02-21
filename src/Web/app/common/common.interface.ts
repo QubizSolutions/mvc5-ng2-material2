@@ -13,5 +13,5 @@ export interface Article {
     ShortDescription: string,
     Year: number,
     Link: string,
-    AuthorIds: number[]
+    Authors: { [id: number]: string; }[]
 }

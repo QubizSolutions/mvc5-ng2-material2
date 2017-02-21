@@ -6,6 +6,7 @@
                 <md-icon md-list-avatar>face</md-icon>
                 <h4 md-line>{{author.FirstName}} {{author.LastName}}</h4>
                 <p md-line> {{author.BirthDate| date}} </p>
+                <button md-mini-fab (click)="openAuthorDetail(author.Id)"><md-icon>apps</md-icon></button>
             </md-list-item>
         </md-list>
     </md-card-content>
