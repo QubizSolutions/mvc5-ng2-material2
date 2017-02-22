@@ -5,13 +5,24 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Tesseract.Api.Mappers;
 using Tesseract.Api.Models;
+using Tesseract.DA.Repositories;
 
 namespace Tesseract.Api.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AuthorController : ApiController
     {
+        private AuthorRepository authorReposotiry;
+        private ArticleRepository articleReposotiry;
+
+        public AuthorController()
+        {
+            authorReposotiry = new AuthorRepository();
+            articleReposotiry = new ArticleRepository();
+        }
+
         Guid authorID1 = new Guid("1ac38fe2-8231-43d9-a96f-1ab7b293864a");
         Guid authorID2 = new Guid("1ac38fe2-8231-43d9-a96f-1ab7b293864b");
         Guid authorID3 = new Guid("1ac38fe2-8231-43d9-a96f-1ab7b293864c");
@@ -24,41 +35,54 @@ namespace Tesseract.Api.Controllers
         [HttpGet]
         public IHttpActionResult GetAuthors()
         {
-            Author[] authors = Authors().ToArray();
+            Author[] authors = authorReposotiry.GetAuthorsWithArticles().Select(x => x.ToModel()).ToArray();
+            
             return Ok(authors);
         }
 
         [HttpGet]
         public IHttpActionResult GetAuthorNames()
         {
-            return Ok(new Dictionary<Guid, string> { { authorID1, "Tony Stark" }, { authorID2, "Peter Parker" }, { authorID3, "Steve Rogers" } });
+            Author[] authors = authorReposotiry.GetAuthorsWithArticles().Select(x => x.ToModel()).ToArray();
+
+            return Ok(authors.Select(x => new KeyValuePair<Guid, string>(x.Id, x.FirstName + " " + x.LastName)).ToDictionary(x => x.Key, x => x.Value));
         }
 
         [HttpGet]
         public IHttpActionResult GetAuthorById(Guid id)
         {
-            Author author = Authors().FirstOrDefault(x => x.Id == id);
+            Author author = authorReposotiry.GetAuthorById(id).ToModel();
             return Ok(author);
         }
 
         [HttpPost]
         public IHttpActionResult UpdateAuthor(Author author)
         {
+            authorReposotiry.Update(author.ToEntity());
             return Ok();
         }
 
         [HttpGet]
         public IHttpActionResult GetArticleById(Guid id)
         {
-            Article article = Articles().FirstOrDefault(x => x.Id == id);
+            Article article = articleReposotiry.GetArticleById(id).ToModel();
             return Ok(article);
         }
 
         [HttpPost]
-        public IHttpActionResult UpdateArticle(Article author)
+        public IHttpActionResult UpdateArticle(Article article)
         {
+            articleReposotiry.Update(article.ToEntity());
             return Ok();
         }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteArticleById(Guid id)
+        {
+            articleReposotiry.DeleteArticleById(id);
+            return Ok();
+        }
+        
 
         private List<Author> Authors()
         {

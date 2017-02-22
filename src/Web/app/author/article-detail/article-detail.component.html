@@ -6,7 +6,8 @@
                     <md-icon md-list-avatar>book</md-icon>
                     <h4 md-line>{{article.Title}}</h4>
                     <p md-line> {{article.Year}} </p>
-                    <button md-mini-fab (click)="editArticle(article.Id)"><md-icon>mode_edit</md-icon></button>
+                    <button md-mini-fab class="article-action" (click)="editArticle(article.Id)"><md-icon>mode_edit</md-icon></button>
+                    <button md-mini-fab class="article-action" (click)="deleteArticle(article.Id)"><md-icon>delete</md-icon></button>
                 </md-list-item>
                 <md-list-item>
                     <md-icon md-list-avatar>subject</md-icon>

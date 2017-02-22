@@ -27,5 +27,9 @@
 }
 
 .dialog-action{
-    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.error-message{
+    color: red;
 }

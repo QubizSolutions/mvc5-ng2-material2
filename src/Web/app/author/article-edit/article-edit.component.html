@@ -23,11 +23,12 @@
             <md-chip class="author-chip" *ngFor="let key of keys(article.Authors)">
                 <div class="chip-content"> 
                     <span>{{article.Authors[key]}}</span>
-                    <md-icon *ngIf="authorId != key" (click)="removeArticleAuthor(key)">clear</md-icon>
+                    <md-icon *ngIf="authorId != key && keys(article.Authors).length > 1" (click)="removeArticleAuthor(key)">clear</md-icon>
                 </div>
             </md-chip>
         </md-chip-list>
     </div>
+    <span *ngIf="errorMessage" class="error-message">{{errorMessage}}</span>
 </md-dialog-content>
 
 <md-dialog-actions>

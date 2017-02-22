@@ -30,10 +30,14 @@ export class AuthorDetailComponent implements OnInit {
         this.route.params.subscribe(params => {
             let id = params['id'];
 
-            let sub = this.authorService.getAuthorById(id).subscribe(author => {
-                this.author = author as Author;
-                sub.unsubscribe;
-            });
+            this.getAuthorById(id);
+        });
+    }
+
+    getAuthorById(id: string) {
+        let sub = this.authorService.getAuthorById(id).subscribe(author => {
+            this.author = author as Author;
+            sub.unsubscribe;
         });
     }
 
@@ -48,13 +52,16 @@ export class AuthorDetailComponent implements OnInit {
     addArticle() {
         let config: MdDialogConfig = {
             width: '500px',
-            height: '430px',
         };
 
         let dialogRef = this.dialog.open(ArticleEditComponent, config);
         dialogRef.componentInstance.dialogRef = dialogRef;
         dialogRef.componentInstance.authorId = this.author.Id;
         dialogRef.componentInstance.authorName = `${this.author.FirstName} ${this.author.LastName}`;
+        dialogRef.afterClosed().subscribe(result => {
+            if(result)
+                this.getAuthorById(this.author.Id);
+        });
     }
 
     editAuthor(id: string) {
@@ -65,5 +72,9 @@ export class AuthorDetailComponent implements OnInit {
         let dialogRef = this.dialog.open(AuthorEditComponent, config);
         dialogRef.componentInstance.dialogRef = dialogRef;
         dialogRef.componentInstance.authorId = id;
+        dialogRef.afterClosed().subscribe(result => {
+            if (result)
+                this.getAuthorById(this.author.Id);
+        });
     }
 }

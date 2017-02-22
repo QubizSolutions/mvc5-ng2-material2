@@ -14,6 +14,7 @@
         <md-input-container>
             <input mdInput placeholder="Country" [(ngModel)]="author.Country" required>
         </md-input-container>
+        <span *ngIf="errorMessage" class="error-message">{{errorMessage}}</span>
     </div>
 </md-dialog-content>
 

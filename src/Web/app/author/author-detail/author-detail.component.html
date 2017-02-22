@@ -24,7 +24,7 @@
                     </md-chip-list>
                 </md-list-item>
             </md-list>
-            <button md-raised-button color="primary" (click)="addArticle()">Add article</button>
+            <button md-raised-button color="primary" class="add-article" (click)="addArticle()">Add article</button>
         </md-card-content>
     </md-card>
     <div *ngIf="author.Articles.length > 0">
@@ -36,6 +36,7 @@
                         <md-icon md-list-avatar>book</md-icon>
                         <h4 md-line>{{article.Title}}</h4>
                         <p md-line> {{article.Year}} </p>
+                        <button md-mini-fab (click)="openArticleDetail(article.Id)"><md-icon>apps</md-icon></button>
                     </md-list-item>
                     <md-list-item>
                         <md-icon md-list-avatar>subject</md-icon>

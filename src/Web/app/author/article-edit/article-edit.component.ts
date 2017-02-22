@@ -13,7 +13,6 @@ export class ArticleEditComponent implements OnInit {
     @Input() authorId: string;
     @Input() authorName: string;
     @Input() articleId: string;
-    @Input() dialogRef: MdDialogRef<ArticleEditComponent>;
 
     keys(dict: any): Array<string> {
         return Object.keys(dict);
@@ -27,16 +26,20 @@ export class ArticleEditComponent implements OnInit {
         Link: '',
         Authors: {}
     };
-
+    originalArticle: Article = Object.assign({}, this.article);
     authors: { [id: number]: string; }[] = [];
+    errorMessage: string = '';
 
-    constructor(private authorService: AuthorService) { }
+    constructor(
+        private authorService: AuthorService,
+        public dialogRef: MdDialogRef<ArticleEditComponent>) { }
 
     ngOnInit() {
         if (this.articleId) {
             let sub = this.authorService.getArticleById(this.articleId).subscribe(article => {
                 this.article = article as Article;
-                sub.unsubscribe;
+                this.originalArticle = Object.assign({}, article);
+                sub.unsubscribe();
             });
         }
         else if (this.authorId && this.authorName) {
@@ -50,11 +53,16 @@ export class ArticleEditComponent implements OnInit {
     }
 
     save() {
-        this.authorService.updateArticle(this.article).subscribe(
-            data => {
-
-            },
-            error => { });
+        if (this.isValid()) {
+            if (this.hasDataChanged())
+                this.authorService.updateArticle(this.article).subscribe(
+                    data => {
+                        this.dialogRef.close(true);
+                    },
+                    error => { });
+            else
+                this.dialogRef.close();
+        }
     }
 
     addArticleAuthor(id: string) {
@@ -64,5 +72,38 @@ export class ArticleEditComponent implements OnInit {
 
     removeArticleAuthor(id: string) {
         delete this.article.Authors[id];
+    }
+
+    private isValid() {
+        this.errorMessage = '';
+
+        if (!this.article.Title ||
+            !this.article.ShortDescription ||
+            !this.article.Link ||
+            (isNaN(this.article.Year) || this.article.Year < 1000) ||
+            this.keys(this.article.Authors).length == 0) {
+
+            this.errorMessage = 'Please complete all of the fields';
+            return false;
+        }
+        return true;
+    }
+
+    private hasDataChanged() {
+        if (this.article.Title != this.originalArticle.Title ||
+            this.article.ShortDescription != this.originalArticle.ShortDescription ||
+            this.article.Year != this.originalArticle.Year ||
+            this.article.Link != this.originalArticle.Link)
+            return true;
+
+        let originalAuthorIds = this.keys(this.originalArticle.Authors);
+        let authorIds = this.keys(this.article.Authors);
+
+        if (authorIds.length != originalAuthorIds.length)
+            return true;
+
+        let newAuthors = authorIds.filter(x => !originalAuthorIds.find(y => y == x));
+
+        return newAuthors.length > 0;
     }
 }

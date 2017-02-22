@@ -4,6 +4,7 @@ import { AuthorService } from '../author.service';
 import { Author, Article } from '../author.interface';
 import { ArticleEditComponent } from '../article-edit/article-edit.component';
 import { MdDialog, MdDialogConfig } from '@angular/material';
+import { QuestionDialogComponent } from '../../common/components/question-dialog/question-dialog.component';
 
 @Component({
     moduleId: module.id,
@@ -28,12 +29,16 @@ export class ArticleDetailComponent implements OnInit {
         this.route.params.subscribe(params => {
             let id = params['id'];
 
-            let sub = this.authorService.getArticleById(id).subscribe(
-                article => {
-                    this.article = article as Article;
-                    sub.unsubscribe();
-                });
+            this.getArticleById(id);
         });
+    }
+
+    getArticleById(id: string) {
+        let sub = this.authorService.getArticleById(id).subscribe(
+            article => {
+                this.article = article as Article;
+                sub.unsubscribe();
+            });
     }
 
     openAuthorDetail(id: number) {
@@ -42,12 +47,29 @@ export class ArticleDetailComponent implements OnInit {
 
     editArticle(id: string) {
         let config: MdDialogConfig = {
-            width: '500',
-            height: '430',
+            width: '500px',
         };
 
         let dialogRef = this.dialog.open(ArticleEditComponent, config);
         dialogRef.componentInstance.dialogRef = dialogRef;
         dialogRef.componentInstance.articleId = id;
+        dialogRef.afterClosed().subscribe(result => {
+            if(result)
+                this.getArticleById(this.article.Id);
+        });
+    }
+
+    deleteArticle(id: string) {
+        let dialogRef = this.dialog.open(QuestionDialogComponent);
+        dialogRef.componentInstance.question = 'Do you want to delete this article?';
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                let sub = this.authorService.deleteArticleById(id).subscribe(
+                    data => {
+                        sub.unsubscribe();
+                        this.router.navigate(['/authors']);
+                    });
+            }
+        });
     }
 }

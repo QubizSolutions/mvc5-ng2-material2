@@ -48,4 +48,11 @@ export class AuthorService {
         return this.http.post(`${this.httpUtilityService.serverUrl}${this.url}/UpdateArticle`, article)
             .catch(this.httpUtilityService.extractData);
     }
+
+    deleteArticleById(id: string): Observable<any> {
+        let params = new URLSearchParams();
+        params.set('id', id);
+        return this.http.delete(`${this.httpUtilityService.serverUrl}${this.url}/DeleteArticleById`, { search: params })
+            .catch(this.httpUtilityService.extractData);
+    }
 }

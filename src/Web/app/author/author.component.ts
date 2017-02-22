@@ -17,6 +17,10 @@ export class AuthorComponent implements OnInit {
     constructor(private authorService: AuthorService, private router: Router, private dialog: MdDialog) { }
 
     ngOnInit() {
+        this.getAuthors();
+    }
+
+    private getAuthors() {
         let obs = this.authorService.getAuthors().subscribe(authors => {
             this.authors = authors as Author[];
             obs.unsubscribe();
@@ -33,6 +37,9 @@ export class AuthorComponent implements OnInit {
         };
 
         let dialogRef = this.dialog.open(AuthorEditComponent, config);
-        dialogRef.componentInstance.dialogRef = dialogRef;
+        dialogRef.afterClosed().subscribe(result => {
+            if (result)
+                this.getAuthors()
+        });
     }
 }

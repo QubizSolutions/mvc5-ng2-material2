@@ -7,3 +7,17 @@
     margin-right: 5px;
     cursor: pointer;
 }
+
+.articles-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.add-article{
+    margin-top: 10px;
+}

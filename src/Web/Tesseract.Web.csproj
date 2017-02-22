@@ -215,6 +215,8 @@
     <Content Include="app\author\author-detail\author-detail.component.css" />
     <Content Include="app\author\author-detail\author-detail.component.html" />
     <Content Include="app\author\author.component.html" />
+    <Content Include="app\common\components\question-dialog\question-dialog.component.css" />
+    <Content Include="app\common\components\question-dialog\question-dialog.component.html" />
     <Content Include="app\home\home.component.html" />
     <Content Include="app\material\material.component.css" />
     <Content Include="app\material\material.component.html" />
@@ -278,6 +280,7 @@
     <TypeScriptCompile Include="app\author\author-detail\author-detail.component.ts" />
     <TypeScriptCompile Include="app\author\author.interface.ts" />
     <TypeScriptCompile Include="app\common\common.module.ts" />
+    <TypeScriptCompile Include="app\common\components\question-dialog\question-dialog.component.ts" />
     <TypeScriptCompile Include="app\common\helpers\http-utility.service.ts" />
     <TypeScriptCompile Include="app\author\author.module.ts" />
     <TypeScriptCompile Include="app\author\author.component.ts" />
