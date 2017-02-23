@@ -336,4 +336,12 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+
+  <ItemGroup>
+    <Node_Modules Include="$(SolutionDir)\Web\node_modules\*.*"></Node_Modules>
+  </ItemGroup>
+
+  <Target Name="Copy_Node_Modules_To_Package_Folder" BeforeTargets="PipelineCopyAllFilesToOneFolderForMsdeploy">
+    <Copy SourceFiles="@(Node_Modules)" DestinationFolder="$(SolutionDir)\Web\obj\${Configuration}\Package\PackageTmp\node_modules" />
+  </Target>
 </Project>
