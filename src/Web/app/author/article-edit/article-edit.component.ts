@@ -38,7 +38,7 @@ export class ArticleEditComponent implements OnInit {
         if (this.articleId) {
             let sub = this.authorService.getArticleById(this.articleId).subscribe(article => {
                 this.article = article as Article;
-                this.originalArticle = Object.assign({}, article);
+                this.originalArticle = Object.assign({}, article, { Authors: Object.assign({}, article.Authors) });
                 sub.unsubscribe();
             });
         }
