@@ -341,7 +341,14 @@
     <Node_Modules Include="$(MSBuildThisFileDirectory)\node_modules\*.*"></Node_Modules>
   </ItemGroup>
 
-  <Target Name="Copy_Node_Modules_To_Package_Folder" AfterTargets="PipelineTransformPhase">
-    <Copy SourceFiles="@(Node_Modules)" DestinationFolder="$(MSBuildThisFileDirectory)\obj\${Configuration}\Package\PackageTmp\node_modules" />
+  <Target Name="Copy_Node_Modules_To_Package_Folder" AfterTargets="CopyAllFilesToSingleFolderForMsdeploy">
+    <!--<Copy SourceFiles="@(Node_Modules)" DestinationFolder="$(MSBuildThisFileDirectory)\obj\${Configuration}\Package\PackageTmp\node_modules" />-->
+    <Copy
+      SourceFiles="@(Node_Modules)"
+      DestinationFolder="$(MSBuildThisFileDirectory)\obj\${Configuration}\Package\PackageTmp\%(RecursiveDir)"
+      SkipUnchangedFiles="true"
+      OverwriteReadOnlyFiles="true"
+      Retries="3"
+      RetryDelayMilliseconds="300"/>
   </Target>
 </Project>
