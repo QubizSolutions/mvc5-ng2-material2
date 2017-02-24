@@ -359,6 +359,7 @@
     </ProjectReference>
   </ItemGroup>
   <Target Name="Copy_Node_Modules_To_Package_Folder" AfterTargets="CopyAllFilesToSingleFolderForMsdeploy">
-    <Copy SourceFiles="@(Node_Modules)" DestinationFolder="$(MSBuildThisFileDirectory)obj\$(Configuration)\Package\PackageTmp\node_modules\%(RecursiveDir)" />
+    <Copy SourceFiles="@(Node_Modules)" DestinationFolder="$(MSBuildThisFileDirectory)obj\$(Configuration)\Package\PackageTmp\node_modules\%(RecursiveDir)" 
+          SkipUnchangedFiles="true"/>
   </Target>
 </Project>
