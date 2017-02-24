@@ -7,7 +7,7 @@ using Tesseract.Infrastructure;
 
 namespace Tesseract.DA.Repositories
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly AuthorsDBContext dbContext;
 
