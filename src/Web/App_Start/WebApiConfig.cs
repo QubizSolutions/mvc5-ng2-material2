@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace Api
+namespace Web
 {
     public static class WebApiConfig
     {
@@ -12,10 +12,9 @@ namespace Api
             // Web API configuration and services
 
             // Web API routes
-            config.EnableCors();
+
             config.MapHttpAttributeRoutes();
-
-
+            
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{action}/{id}",

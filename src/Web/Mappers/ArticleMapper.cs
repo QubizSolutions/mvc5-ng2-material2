@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Tesseract.Api.Models;
+using Tesseract.Web.Models;
 
-namespace Tesseract.Api.Mappers
+namespace Tesseract.Web.Mappers
 {
     public static class ArticleMapper
     {

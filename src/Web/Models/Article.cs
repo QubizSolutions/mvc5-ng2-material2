@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tesseract.Api.Models
+namespace Tesseract.Web.Models
 {
     public class Article
     {
