@@ -10,7 +10,7 @@ namespace Tesseract.DA
 {
     public class AuthorsDBContext : DbContext
     {
-        public AuthorsDBContext() : base("AuthorContext")
+        public AuthorsDBContext(string connectionString) : base(connectionString)
         {
         }
 

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Tesseract.DA.Entities
 {
-    public class Article
+    public class Article: IEntity
     {
         public Article()
         {
