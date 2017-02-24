@@ -18,6 +18,15 @@ namespace Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+#if !DEBUG
+            System.Data.Entity.Database.SetInitializer<Tesseract.DA.AuthorsDBContext>(new System.Data.Entity.MigrateDatabaseToLatestVersion<Tesseract.DA.AuthorsDBContext, Tesseract.DA.Migrations.Configuration>());
+
+            Tesseract.DA.AuthorsDBContext tomContext = new Tesseract.DA.AuthorsDBContext();
+            tomContext.Database.Initialize(true);
+
+            System.Data.Entity.Database.SetInitializer<Tesseract.DA.AuthorsDBContext>(null);
+#endif
         }
     }
 }
