@@ -7,7 +7,7 @@ namespace Tesseract.DA.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Tesseract.DA.AuthorsDBContext>
+    public sealed class Configuration : DbMigrationsConfiguration<Tesseract.DA.AuthorsDBContext>
     {
         public Configuration()
         {
