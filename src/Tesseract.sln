@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesseract.Web", "Web\Tesser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesseract.DA", "DA\Tesseract.DA.csproj", "{7EB996F1-AFB8-404E-B27D-4FC523AB4B9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesseract.Infrastructure", "Infrastructure\Tesseract.Infrastructure.csproj", "{9A5F50CC-A620-473A-83FF-783D4C99B871}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesseract.Services", "Services\Tesseract.Services.csproj", "{5733445B-0C32-4875-87AF-2037FF40ECB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{7EB996F1-AFB8-404E-B27D-4FC523AB4B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EB996F1-AFB8-404E-B27D-4FC523AB4B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EB996F1-AFB8-404E-B27D-4FC523AB4B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5F50CC-A620-473A-83FF-783D4C99B871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5F50CC-A620-473A-83FF-783D4C99B871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5F50CC-A620-473A-83FF-783D4C99B871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5F50CC-A620-473A-83FF-783D4C99B871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5733445B-0C32-4875-87AF-2037FF40ECB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5733445B-0C32-4875-87AF-2037FF40ECB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5733445B-0C32-4875-87AF-2037FF40ECB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5733445B-0C32-4875-87AF-2037FF40ECB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

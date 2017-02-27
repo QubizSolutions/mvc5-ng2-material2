@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class HttpUtilityService {
-    
+
     extractData(res: Response) {
         return res.json() || [];
     }

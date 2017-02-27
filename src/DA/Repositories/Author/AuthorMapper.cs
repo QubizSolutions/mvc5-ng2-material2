@@ -1,26 +1,28 @@
 ﻿using System.Linq;
-using Tesseract.Web.Models;
+using Tesseract.DA.Article.Contract;
+using Tesseract.DA.Article;
+using Tesseract.DA.Author.Contract;
 
-namespace Tesseract.Web.Mappers
+namespace Tesseract.DA.Author
 {
     public static class AuthorMapper
     {
-        public static Author ToModel(this DA.Entities.Author author, bool convertArticles = true)
+        public static AuthorContract ToContract(this Entity.Author author, bool convertArticles = true)
         {
-            return new Author()
+            return new AuthorContract()
             {
                 Id = author.Id,
                 FirstName = author.FirstName,
                 LastName = author.LastName,
                 BirthDate = author.BirthDate,
                 Country = author.Country,
-                Articles = convertArticles && author.Articles != null ? author.Articles.Select(x => x.ToModel(false)).ToArray() : null
+                Articles = convertArticles && author.Articles != null ? author.Articles.Select(x => x.ToContract(false)).ToArray() : new ArticleContract[0]
             };
         }
 
-        public static DA.Entities.Author ToEntity(this Author author)
+        public static Entity.Author ToEntity(this AuthorContract author)
         {
-            return new DA.Entities.Author()
+            return new Entity.Author()
             {
                 Id = author.Id,
                 FirstName = author.FirstName,
