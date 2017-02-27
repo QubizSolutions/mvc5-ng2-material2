@@ -31,8 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -48,16 +52,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorsDBContext.cs" />
-    <Compile Include="Entities\Article.cs" />
-    <Compile Include="Entities\Author.cs" />
+    <Compile Include="Repositories\Article\Article.cs" />
+    <Compile Include="Repositories\Author\Author.cs" />
+    <Compile Include="IUnitOfWorkFactory.cs" />
     <Compile Include="Migrations\201702220918530_InitialCreate.cs" />
     <Compile Include="Migrations\201702220918530_InitialCreate.Designer.cs">
       <DependentUpon>201702220918530_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\ArticleRepository.cs" />
-    <Compile Include="Repositories\AuthorRepository.cs" />
+    <Compile Include="Repositories\Article\ArticleContract.cs" />
+    <Compile Include="Repositories\Article\ArticleMapper.cs" />
+    <Compile Include="Repositories\Article\ArticleRepository.cs" />
+    <Compile Include="Repositories\Article\IArticleRepository.cs" />
+    <Compile Include="Repositories\Author\AuthorContract.cs" />
+    <Compile Include="Repositories\Author\AuthorMapper.cs" />
+    <Compile Include="Repositories\Author\AuthorRepository.cs" />
+    <Compile Include="Repositories\Author\IAuthorRepository.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="UnitOfWorkFaktory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -70,6 +86,13 @@
       <DependentUpon>201702220918530_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Tesseract.Infrastructure.csproj">
+      <Project>{9a5f50cc-a620-473a-83ff-783d4c99b871}</Project>
+      <Name>Tesseract.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

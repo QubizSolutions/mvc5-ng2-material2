@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tesseract.Web.Models
+namespace Tesseract.DA.Article.Entity
 {
     public class Article
     {
+        public Article()
+        {
+            this.Authors = new HashSet<Author.Entity.Author>();
+        }
+
         public Guid Id { get; set; }
 
         public string Title { get; set; }
@@ -17,6 +22,6 @@ namespace Tesseract.Web.Models
 
         public string Link { get; set; }
 
-        public Dictionary<Guid, string> Authors { get; set; }
+        public virtual ICollection<Author.Entity.Author> Authors { get; set; }
     }
 }

@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using Tesseract.DA.Repositories;
-using Tesseract.Web.Mappers;
-using Tesseract.Web.Models;
+using Tesseract.DA.Article.Contract;
+using Tesseract.DA.Author.Contract;
+using Tesseract.Services.Services;
 
 namespace Tesseract.Web.Controllers.Api
 {
     public class AuthorController : ApiController
     {
-        private AuthorRepository authorReposotiry;
-        private ArticleRepository articleReposotiry;
+        private IAuthorService authorService;
+        private IArticleService articleService;
 
-        public AuthorController()
+        public AuthorController(IAuthorService authorService, IArticleService articleService)
         {
-            authorReposotiry = new AuthorRepository();
-            articleReposotiry = new ArticleRepository();
+            this.authorService = authorService;
+            this.articleService = articleService;
         }
 
         [HttpGet]
         public IHttpActionResult GetAuthors()
         {
-            Author[] authors = authorReposotiry.GetAuthorsWithArticles().Select(x => x.ToModel()).ToArray();
+            AuthorContract[] authors = authorService.GetAuthors().ToArray();
             
             return Ok(authors);
         }
@@ -30,7 +30,7 @@ namespace Tesseract.Web.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAuthorNames()
         {
-            Author[] authors = authorReposotiry.GetAuthorsWithArticles().Select(x => x.ToModel()).ToArray();
+            AuthorContract[] authors = authorService.GetAuthors().ToArray();
 
             return Ok(authors.Select(x => new KeyValuePair<Guid, string>(x.Id, x.FirstName + " " + x.LastName)).ToDictionary(x => x.Key, x => x.Value));
         }
@@ -38,35 +38,35 @@ namespace Tesseract.Web.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAuthorById(Guid id)
         {
-            Author author = authorReposotiry.GetAuthorById(id).ToModel();
+            AuthorContract author = authorService.GetAuthorById(id);
             return Ok(author);
         }
 
         [HttpPost]
-        public IHttpActionResult UpdateAuthor(Author author)
+        public IHttpActionResult UpdateAuthor(AuthorContract author)
         {
-            authorReposotiry.Update(author.ToEntity());
+            authorService.UpdateAuthor(author);
             return Ok();
         }
 
         [HttpGet]
         public IHttpActionResult GetArticleById(Guid id)
         {
-            Article article = articleReposotiry.GetArticleById(id).ToModel();
+            ArticleContract article = articleService.GetArticleById(id);
             return Ok(article);
         }
 
         [HttpPost]
-        public IHttpActionResult UpdateArticle(Article article)
+        public IHttpActionResult UpdateArticle(ArticleContract article)
         {
-            articleReposotiry.Update(article.ToEntity());
+            articleService.UpdateArticle(article);
             return Ok();
         }
 
         [HttpDelete]
         public IHttpActionResult DeleteArticleById(Guid id)
         {
-            articleReposotiry.DeleteArticleById(id);
+            articleService.DeleteArticleById(id);
             return Ok();
         }
     }

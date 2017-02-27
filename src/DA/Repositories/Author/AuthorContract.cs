@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Tesseract.DA.Article.Contract;
+using Tesseract.DA.Author;
 
-namespace Tesseract.Web.Models
+namespace Tesseract.DA.Author.Contract
 {
-    public class Author
+    public class AuthorContract
     {
         public Guid Id { get; set; }
 
@@ -17,6 +19,6 @@ namespace Tesseract.Web.Models
 
         public string Country { get; set; }
 
-        public Article[] Articles { get; set; }
+        public ArticleContract[] Articles { get; set; }
     }
 }
