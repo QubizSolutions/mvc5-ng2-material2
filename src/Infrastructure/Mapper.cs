@@ -72,7 +72,7 @@ namespace Tesseract.Infrastructure
                 actualSourceType = sourceType.GetGenericArguments()[0];
 
             if (destinationType.IsGenericType && destinationType.GetGenericTypeDefinition() == typeof(List<>))
-                actualDestinationType = destinationType.GetGenericArguments()[0];
+                actualDestinationType = sourceType.GetGenericArguments()[0];
 
             MapProperties(actualSourceType, actualDestinationType);
 

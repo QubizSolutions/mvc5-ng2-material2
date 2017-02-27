@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tesseract.Services.Models;
+using Tesseract.DA.Author.Contract;
 
 namespace Tesseract.Services.Services
 {
     public interface IAuthorService
     {
-        void UpdateAuthor(Author author);
-        IEnumerable<Author> GetAuthors();
-        Author GetAuthorById(Guid id);
+        void UpdateAuthor(AuthorContract author);
+        AuthorContract[] GetAuthors();
+        AuthorContract GetAuthorById(Guid id);
     }
 }

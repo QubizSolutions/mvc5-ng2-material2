@@ -32,7 +32,7 @@ namespace Tesseract.DA.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.ArticleAuthors",
+                "dbo.AuthorArticles",
                 c => new
                     {
                         Article_Id = c.Guid(nullable: false),
@@ -48,11 +48,11 @@ namespace Tesseract.DA.Migrations
         
         public override void Down()
         {
-            DropIndex("dbo.ArticleAuthors", new[] { "Author_Id" });
-            DropIndex("dbo.ArticleAuthors", new[] { "Article_Id" });
-            DropForeignKey("dbo.ArticleAuthors", "Author_Id", "dbo.Authors");
-            DropForeignKey("dbo.ArticleAuthors", "Article_Id", "dbo.Articles");
-            DropTable("dbo.ArticleAuthors");
+            DropIndex("dbo.AuthorArticles", new[] { "Author_Id" });
+            DropIndex("dbo.AuthorArticles", new[] { "Article_Id" });
+            DropForeignKey("dbo.AuthorArticles", "Author_Id", "dbo.Authors");
+            DropForeignKey("dbo.AuthorArticles", "Article_Id", "dbo.Articles");
+            DropTable("dbo.AuthorArticles");
             DropTable("dbo.Articles");
             DropTable("dbo.Authors");
         }

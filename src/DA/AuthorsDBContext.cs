@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tesseract.DA.Entities;
+using Tesseract.DA.Author.Entity;
 
 namespace Tesseract.DA
 {
@@ -14,9 +14,14 @@ namespace Tesseract.DA
         {
         }
 
-        public DbSet<Author> Authors { get; set; }
+        public AuthorsDBContext() : base("AuthorContext")
+        {
+        }
 
-        public DbSet<Article> Articles { get; set; }
+
+        public DbSet<Author.Entity.Author> Authors { get; set; }
+
+        public DbSet<Article.Entity.Article> Articles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

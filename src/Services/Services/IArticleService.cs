@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tesseract.Services.Models;
+using Tesseract.DA.Article.Contract;
 
 namespace Tesseract.Services.Services
 {
     public interface IArticleService
     {
-        void UpdateArticle(Article article);
-        Article GetArticleById(Guid id);
+        void UpdateArticle(ArticleContract article);
+        ArticleContract GetArticleById(Guid id);
         void DeleteArticleById(Guid id);
     }
 }

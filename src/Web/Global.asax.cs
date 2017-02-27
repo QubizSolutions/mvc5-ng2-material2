@@ -2,6 +2,7 @@
 using SimpleInjector.Integration.WebApi;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -31,8 +32,8 @@ namespace Web
 
 #if !DEBUG
             System.Data.Entity.Database.SetInitializer<Tesseract.DA.AuthorsDBContext>(new System.Data.Entity.MigrateDatabaseToLatestVersion<Tesseract.DA.AuthorsDBContext, Tesseract.DA.Migrations.Configuration>());
-
-            Tesseract.DA.AuthorsDBContext tomContext = new Tesseract.DA.AuthorsDBContext();
+            
+            Tesseract.DA.AuthorsDBContext tomContext = new AuthorsDBContext(ConfigurationManager.ConnectionStrings["AuthorContext"].ConnectionString);
             tomContext.Database.Initialize(true);
 
             System.Data.Entity.Database.SetInitializer<Tesseract.DA.AuthorsDBContext>(null);

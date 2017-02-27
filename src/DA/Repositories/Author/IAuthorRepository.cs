@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tesseract.DA.Entities;
+using Tesseract.DA.Author.Contract;
 
 namespace Tesseract.DA.Repositories
 {
-    public interface IAuthorRepository : IBaseRepository<Author>
+    public interface IAuthorRepository : IBaseRepository<Author.Entity.Author>
     {
-        IEnumerable<Author> ListAuthors();
-        IEnumerable<Author> ListByIds(Guid[] ids);
+        void Create(AuthorContract author);
+        void Update(AuthorContract author);
+        AuthorContract GetById(Guid id);
+        AuthorContract[] ListAuthors();
+        AuthorContract[] ListByIds(Guid[] ids);
     }
 }

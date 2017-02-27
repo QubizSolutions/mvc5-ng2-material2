@@ -52,9 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorsDBContext.cs" />
-    <Compile Include="Entities\Article.cs" />
-    <Compile Include="Entities\Author.cs" />
-    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Repositories\Article\Article.cs" />
+    <Compile Include="Repositories\Author\Author.cs" />
     <Compile Include="IUnitOfWorkFactory.cs" />
     <Compile Include="Migrations\201702220918530_InitialCreate.cs" />
     <Compile Include="Migrations\201702220918530_InitialCreate.Designer.cs">
@@ -62,8 +61,12 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Article\ArticleContract.cs" />
+    <Compile Include="Repositories\Article\ArticleMapper.cs" />
     <Compile Include="Repositories\Article\ArticleRepository.cs" />
     <Compile Include="Repositories\Article\IArticleRepository.cs" />
+    <Compile Include="Repositories\Author\AuthorContract.cs" />
+    <Compile Include="Repositories\Author\AuthorMapper.cs" />
     <Compile Include="Repositories\Author\AuthorRepository.cs" />
     <Compile Include="Repositories\Author\IAuthorRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
@@ -86,6 +89,9 @@
       <Project>{9a5f50cc-a620-473a-83ff-783d4c99b871}</Project>
       <Name>Tesseract.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

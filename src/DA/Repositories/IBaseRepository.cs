@@ -8,11 +8,5 @@ namespace Tesseract.DA.Repositories
 {
     public interface IBaseRepository<TModel> where TModel : class
     {
-        IEnumerable<TModel> GetAll();
-        TModel GetByID(Guid id);
-
-        void Create(TModel model);
-        void Update(TModel model);
-        void Delete(TModel model);
     }
 }

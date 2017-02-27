@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tesseract.DA;
+using Tesseract.DA.Author.Contract;
 using Tesseract.DA.Repositories;
-using Tesseract.Infrastructure;
-using Tesseract.Services.Models;
 
 namespace Tesseract.Services.Services
 {
@@ -19,36 +14,36 @@ namespace Tesseract.Services.Services
             this.unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public void UpdateAuthor(Author author)
+        public void UpdateAuthor(AuthorContract author)
         {
             using (IUnitOfWork unitOfWork = unitOfWorkFactory.Create())
             {
                 if(author.Id == Guid.Empty)
                 {
                     author.Id = Guid.NewGuid();
-                    unitOfWork.AuthorRepository.Create(Mapper.DeepCopyTo<DA.Entities.Author>(author));
+                    unitOfWork.AuthorRepository.Create(author);
                 }
                 else
                 {
-                    unitOfWork.AuthorRepository.Update(Mapper.DeepCopyTo<DA.Entities.Author>(author));
+                    unitOfWork.AuthorRepository.Update(author);
                 }
                 unitOfWork.Save();
             }
         }
 
-        public IEnumerable<Author> GetAuthors()
+        public AuthorContract[] GetAuthors()
         {
             using (IUnitOfWork unitOfWork = unitOfWorkFactory.Create())
             {
-               return unitOfWork.AuthorRepository.ListAuthors().Select(x=> Mapper.DeepCopyTo<Author>(x));
+                return unitOfWork.AuthorRepository.ListAuthors();
             }
         }
 
-        public Author GetAuthorById(Guid id)
+        public AuthorContract GetAuthorById(Guid id)
         {
             using (IUnitOfWork unitOfWork = unitOfWorkFactory.Create())
             {
-                return Mapper.DeepCopyTo<Author>(unitOfWork.AuthorRepository.GetByID(id));
+                return unitOfWork.AuthorRepository.GetById(id);
             }
         }
     }

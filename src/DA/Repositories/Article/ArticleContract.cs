@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tesseract.Services.Models
+namespace Tesseract.DA.Article.Contract
 {
-    public class Article
+    public class ArticleContract
     {
         public Guid Id { get; set; }
 

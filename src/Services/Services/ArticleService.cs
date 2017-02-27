@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tesseract.DA;
+using Tesseract.DA.Article.Contract;
 using Tesseract.DA.Repositories;
-using Tesseract.Infrastructure;
-using Tesseract.Services.Models;
 
 namespace Tesseract.Services.Services
 {
@@ -19,33 +15,29 @@ namespace Tesseract.Services.Services
             this.unitOfWorkFactory = unitOfWorkFactory;
         }
 
-        public void UpdateArticle(Article article)
+        public void UpdateArticle(ArticleContract article)
         {
             using (IUnitOfWork unitOfWork = unitOfWorkFactory.Create())
             {
-                DA.Entities.Author[] authors = unitOfWork.AuthorRepository.ListByIds(article.Authors.Select(x => x.Key).ToArray()).ToArray();
-
                 if (article.Id == Guid.Empty)
                 {
                     article.Id = Guid.NewGuid();
-                    DA.Entities.Article entity = Mapper.DeepCopyTo<DA.Entities.Article>(article);
-                    entity.Authors = authors;
-                    unitOfWork.ArticleRepository.Create(entity);
+                    unitOfWork.ArticleRepository.Create(article, article.Authors.Select(x => x.Key).ToArray());
                 }
                 else
                 {
-                    unitOfWork.ArticleRepository.Update(Mapper.DeepCopyTo<DA.Entities.Article>(article), authors);
+                    unitOfWork.ArticleRepository.Update(article, article.Authors.Select(x => x.Key).ToArray());
                 }
                 unitOfWork.Save();
             }
         }
         
 
-        public Article GetArticleById(Guid id)
+        public ArticleContract GetArticleById(Guid id)
         {
             using (IUnitOfWork unitOfWork = unitOfWorkFactory.Create())
             {
-                return Mapper.DeepCopyTo<Article>(unitOfWork.ArticleRepository.GetByID(id));
+                return unitOfWork.ArticleRepository.GetById(id);
             }
         }
 

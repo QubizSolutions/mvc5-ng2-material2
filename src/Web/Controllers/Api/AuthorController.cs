@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using Tesseract.Services.Models;
+using Tesseract.DA.Article.Contract;
+using Tesseract.DA.Author.Contract;
 using Tesseract.Services.Services;
 
 namespace Tesseract.Web.Controllers.Api
@@ -21,7 +22,7 @@ namespace Tesseract.Web.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAuthors()
         {
-            Author[] authors = authorService.GetAuthors().ToArray();
+            AuthorContract[] authors = authorService.GetAuthors().ToArray();
             
             return Ok(authors);
         }
@@ -29,7 +30,7 @@ namespace Tesseract.Web.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAuthorNames()
         {
-            Author[] authors = authorService.GetAuthors().ToArray();
+            AuthorContract[] authors = authorService.GetAuthors().ToArray();
 
             return Ok(authors.Select(x => new KeyValuePair<Guid, string>(x.Id, x.FirstName + " " + x.LastName)).ToDictionary(x => x.Key, x => x.Value));
         }
@@ -37,12 +38,12 @@ namespace Tesseract.Web.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAuthorById(Guid id)
         {
-            Author author = authorService.GetAuthorById(id);
+            AuthorContract author = authorService.GetAuthorById(id);
             return Ok(author);
         }
 
         [HttpPost]
-        public IHttpActionResult UpdateAuthor(Author author)
+        public IHttpActionResult UpdateAuthor(AuthorContract author)
         {
             authorService.UpdateAuthor(author);
             return Ok();
@@ -51,12 +52,12 @@ namespace Tesseract.Web.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetArticleById(Guid id)
         {
-            Article article = articleService.GetArticleById(id);
+            ArticleContract article = articleService.GetArticleById(id);
             return Ok(article);
         }
 
         [HttpPost]
-        public IHttpActionResult UpdateArticle(Article article)
+        public IHttpActionResult UpdateArticle(ArticleContract article)
         {
             articleService.UpdateArticle(article);
             return Ok();
