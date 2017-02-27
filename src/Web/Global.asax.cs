@@ -33,8 +33,8 @@ namespace Web
 #if !DEBUG
             System.Data.Entity.Database.SetInitializer<Tesseract.DA.AuthorsDBContext>(new System.Data.Entity.MigrateDatabaseToLatestVersion<Tesseract.DA.AuthorsDBContext, Tesseract.DA.Migrations.Configuration>());
             
-            Tesseract.DA.AuthorsDBContext tomContext = new AuthorsDBContext(ConfigurationManager.ConnectionStrings["AuthorContext"].ConnectionString);
-            tomContext.Database.Initialize(true);
+            Tesseract.DA.AuthorsDBContext authorsDBContext = new AuthorsDBContext(ConfigurationManager.ConnectionStrings["AuthorContext"].ConnectionString);
+            authorsDBContext.Database.Initialize(true);
 
             System.Data.Entity.Database.SetInitializer<Tesseract.DA.AuthorsDBContext>(null);
 #endif

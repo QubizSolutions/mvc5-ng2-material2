@@ -52,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorsDBContext.cs" />
+    <Compile Include="Migrations\201702272335590_Migration.cs" />
+    <Compile Include="Migrations\201702272335590_Migration.Designer.cs">
+      <DependentUpon>201702272335590_Migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Article\Article.cs" />
     <Compile Include="Repositories\Author\Author.cs" />
     <Compile Include="IUnitOfWorkFactory.cs" />
@@ -84,6 +88,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702220918530_InitialCreate.resx">
       <DependentUpon>201702220918530_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702272335590_Migration.resx">
+      <DependentUpon>201702272335590_Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

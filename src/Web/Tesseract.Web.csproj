@@ -377,7 +377,6 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-
   <ItemGroup>
     <Node_Modules Include="$(MSBuildThisFileDirectory)node_modules\**\*.*" />
   </ItemGroup>
@@ -390,33 +389,20 @@
   <Target Name="Copy_Node_Modules_To_Package_Folder" AfterTargets="CopyAllFilesToSingleFolderForMsdeploy">
     <Copy SourceFiles="@(Node_Modules)" DestinationFolder="$(MSBuildThisFileDirectory)obj\$(Configuration)\Package\PackageTmp\node_modules\%(RecursiveDir)" SkipUnchangedFiles="true" />
   </Target>
-
-  <UsingTask TaskName="Microsoft.Build.Tasks.XmlPeek" AssemblyName="Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-  <UsingTask TaskName="Microsoft.Build.Tasks.XmlPoke" AssemblyName="Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
-
+  <UsingTask TaskName="Microsoft.Build.Tasks.XmlPeek" AssemblyName="Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <UsingTask TaskName="Microsoft.Build.Tasks.XmlPoke" AssemblyName="Microsoft.Build.Tasks.v4.0, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <PropertyGroup>
     <WebConfig>$(SolutionDir)\Web\Web.config</WebConfig>
-    <AppConnectionString Condition=" '$(AppConnectionString)'=='' "></AppConnectionString>
-
+    <AppConnectionString Condition=" '$(AppConnectionString)'=='' ">
+    </AppConnectionString>
   </PropertyGroup>
-
   <Target Name="ReadWebConfig" BeforeTargets="BeforeBuild">
-    <XmlPeek Namespaces="&lt;Namespace Prefix='msb' Uri='http://schemas.microsoft.com/developer/msbuild/2003'/&gt;"
-     XmlInputPath="$(WebConfig)"
-     Query="//add[@name='AuthorContext']/@connectionString">
+    <XmlPeek Namespaces="&lt;Namespace Prefix='msb' Uri='http://schemas.microsoft.com/developer/msbuild/2003'/&gt;" XmlInputPath="$(WebConfig)" Query="//add[@name='AuthorContext']/@connectionString">
       <Output TaskParameter="Result" ItemName="Peeked" />
-
     </XmlPeek>
     <Message Text="@(Peeked)" />
-
   </Target>
-
   <Target Name="UpdateWebConfig" BeforeTargets="BeforeBuild" Condition=" '$(AppConnectionString)' != '' ">
-    <XmlPoke Namespaces="&lt;Namespace Prefix='msb' Uri='http://schemas.microsoft.com/developer/msbuild/2003'/&gt;"
-    XmlInputPath="$(WebConfig)"
-    Query="//add[@name='AuthorContext']/@connectionString"
-    Value="$(AppConnectionString)" />
-
+    <XmlPoke Namespaces="&lt;Namespace Prefix='msb' Uri='http://schemas.microsoft.com/developer/msbuild/2003'/&gt;" XmlInputPath="$(WebConfig)" Query="//add[@name='AuthorContext']/@connectionString" Value="$(AppConnectionString)" />
   </Target>
-
 </Project>

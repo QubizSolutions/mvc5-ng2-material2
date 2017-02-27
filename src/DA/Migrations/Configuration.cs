@@ -28,7 +28,7 @@ namespace Tesseract.DA.Migrations
             //  to avoid creating duplicate seed data. E.g.
             //
 
-            context.Authors.AddOrUpdate( p => p.Id,
+            context.Authors.AddOrUpdate(p => p.Id,
                 new Author.Entity.Author
                 {
                     Id = authorID1,
