@@ -35,7 +35,7 @@ namespace Tesseract.DA.Repositories
 
         public AuthorContract GetById(Guid id)
         {
-            return dbSet.FirstOrDefault().ToContract(true);
+            return dbSet.FirstOrDefault(x => x.Id == id).ToContract(true);
         }
 
         public AuthorContract[] ListAuthors()
