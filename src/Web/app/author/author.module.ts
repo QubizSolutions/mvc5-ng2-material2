@@ -1,6 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 
 import { CommonModule } from '../common/common.module';
@@ -16,7 +16,7 @@ import { ArticleEditComponent } from './article-edit/article-edit.component'
 import { AuthorService } from './author.service';
 
 @NgModule({
-    imports: [BrowserModule, FormsModule, MaterialModule, CommonModule],
+    imports: [BrowserModule, FormsModule, ReactiveFormsModule, MaterialModule, CommonModule],
     declarations: [AuthorComponent, AuthorDetailComponent, ArticleDetailComponent, AuthorEditComponent, ArticleEditComponent],
     exports: [AuthorComponent, AuthorDetailComponent, ArticleDetailComponent, AuthorEditComponent, ArticleEditComponent],
     entryComponents: [AuthorEditComponent, ArticleEditComponent],

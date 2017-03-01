@@ -3,6 +3,14 @@
     flex-direction: column;
 }
 
+.input-container{
+    margin-bottom: 10px;
+}
+
+.invalid-input{
+    color: #f44336;
+}
+
 .dialog-actions{
     display: flex;
     flex-direction: row;
@@ -11,7 +19,4 @@
 
 .dialog-action{
     margin-right: 10px;
-}
-.error-message{
-    color: red;
 }

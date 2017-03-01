@@ -1,26 +1,29 @@
 ﻿<h1 md-dialog-title *ngIf="author.Id">Edit author</h1>
 <h1 md-dialog-title *ngIf="!author.Id">Add author</h1>
 <md-dialog-content>
-    <div class="dialog-content">
-        <md-input-container>
-            <input mdInput placeholder="First Name" [(ngModel)]="author.FirstName" required>
+    <form [formGroup]="authorForm" class="dialog-content">
+        <md-input-container class="input-container">
+            <input mdInput placeholder="First Name" [formControl]="authorForm.controls['FirstName']">
+            <md-hint class="invalid-input" *ngIf="authorForm.controls['FirstName'].hasError('required') && (authorForm.controls['FirstName'].touched || submitted)">You must include a first name.</md-hint>
         </md-input-container>
-        <md-input-container>
-            <input mdInput placeholder="Last Name" [(ngModel)]="author.LastName" required>
+        <md-input-container class="input-container">
+            <input mdInput placeholder="Last Name" [formControl]="authorForm.controls['LastName']">
+            <md-hint class="invalid-input" *ngIf="authorForm.controls['LastName'].hasError('required') && (authorForm.controls['LastName'].touched || submitted)">You must include a last name.</md-hint>
         </md-input-container>
-        <md-input-container>
-            <input mdInput type="date" placeholder="Birth Date" [(ngModel)]="author.BirthDate" required>
+        <md-input-container class="input-container">
+            <input mdInput type="date" placeholder="Birth Date" [formControl]="authorForm.controls['BirthDate']">
+            <md-hint class="invalid-input" *ngIf="(authorForm.controls['BirthDate'].hasError('required') || authorForm.controls['BirthDate'].hasError('pattern')) && (authorForm.controls['BirthDate'].touched || submitted)">You must include a birth name.</md-hint>
         </md-input-container>
-        <md-input-container>
-            <input mdInput placeholder="Country" [(ngModel)]="author.Country" required>
+        <md-input-container class="input-container">
+            <input mdInput placeholder="Country" [formControl]="authorForm.controls['Country']">
+            <md-hint class="invalid-input" *ngIf="authorForm.controls['Country'].hasError('required') && (authorForm.controls['Country'].touched || submitted)">You must include a country.</md-hint>
         </md-input-container>
-        <span *ngIf="errorMessage" class="error-message">{{errorMessage}}</span>
-    </div>
+    </form>
 </md-dialog-content>
 
 <md-dialog-actions>
     <div class="dialog-actions">
-        <button md-raised-button color="primary" class="dialog-action" (click)="save()">Save</button>
+        <button md-raised-button color="primary" class="dialog-action" (click)="save(authorForm)">Save</button>
         <button md-raised-button md-dialog-close class="dialog-action">Cancel</button>
     </div>
 </md-dialog-actions>
