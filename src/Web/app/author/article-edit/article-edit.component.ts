@@ -2,6 +2,7 @@
 import { AuthorService } from '../author.service';
 import { Author, Article } from '../author.interface';
 import { MdDialogRef } from '@angular/material';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
@@ -18,6 +19,8 @@ export class ArticleEditComponent implements OnInit {
         return Object.keys(dict);
     }
 
+    articleForm: FormGroup;
+    
     article: Article = <Article>{
         Id: undefined,
         Title: '',
@@ -26,84 +29,120 @@ export class ArticleEditComponent implements OnInit {
         Link: '',
         Authors: {}
     };
-    originalArticle: Article = Object.assign({}, this.article);
-    authors: { [id: number]: string; }[] = [];
-    errorMessage: string = '';
+    submitted: boolean = false;
+
+    authorsControl: FormControl;
+    authors: { [id: number]: string; } = {};
+    authorNames: string[] = [];
+    filteredAuthors: any;
 
     constructor(
+        private formBuilder: FormBuilder,
         private authorService: AuthorService,
-        public dialogRef: MdDialogRef<ArticleEditComponent>) { }
+        public dialogRef: MdDialogRef<ArticleEditComponent>) {
+
+        this.articleForm = this.setFormGroup();
+        this.authorsControl = new FormControl();
+        this.filteredAuthors = this.authorsControl.valueChanges
+            .startWith(null)
+            .map(name => name ? this.filterAuthorNames(name) : this.keys(this.authors));
+    }
 
     ngOnInit() {
         if (this.articleId) {
             let sub = this.authorService.getArticleById(this.articleId).subscribe(article => {
                 this.article = article as Article;
-                this.originalArticle = Object.assign({}, article, { Authors: Object.assign({}, article.Authors) });
+                
+                this.articleForm = this.setFormGroup();
                 sub.unsubscribe();
             });
         }
         else if (this.authorId && this.authorName) {
             this.article.Authors[this.authorId] = this.authorName;
+            this.articleForm = this.setFormGroup();
         }
 
         let getAuthorsSub = this.authorService.getAuthorNames().subscribe(authors => {
-            this.authors = authors as { [id: number]: string; }[];
+            this.authors = authors as { [id: number]: string; };
             getAuthorsSub.unsubscribe();
         });
     }
 
     save() {
-        if (this.isValid()) {
-            if (this.hasDataChanged())
-                this.authorService.updateArticle(this.article).subscribe(
+        this.submitted = true;
+
+        if (this.articleForm.valid) {
+            if (this.articleForm.dirty) {
+
+                let articleToSave = <Article>this.articleForm.value;
+                articleToSave.Authors = {};
+
+                this.articleForm.controls['Authors'].value.forEach((author: { id: string, name: string }) => {
+                    articleToSave.Authors[author.id] = author.name;
+                });
+                
+                this.authorService.updateArticle(articleToSave).subscribe(
                     data => {
                         this.dialogRef.close(true);
                     },
                     error => { });
+            }
             else
                 this.dialogRef.close();
         }
     }
 
     addArticleAuthor(id: string) {
-        if (!this.article.Authors[id])
-            this.article.Authors[id] = this.authors[id];
-    }
+        let control = <FormArray>this.articleForm.controls['Authors'];
+        let index = (<any[]>control.value).findIndex((item) => item.id == id);
 
-    removeArticleAuthor(id: string) {
-        delete this.article.Authors[id];
-    }
-
-    private isValid() {
-        this.errorMessage = '';
-
-        if (!this.article.Title ||
-            !this.article.ShortDescription ||
-            !this.article.Link ||
-            (isNaN(this.article.Year) || this.article.Year < 1000) ||
-            this.keys(this.article.Authors).length == 0) {
-
-            this.errorMessage = 'Please complete all of the fields';
-            return false;
+        if (index == -1) {
+            control.push(this.formBuilder.group({
+                id: [id],
+                name: [this.authors[id]]
+            }));
+            control.markAsTouched(true);
+            this.articleForm.markAsDirty();
         }
-        return true;
     }
 
-    private hasDataChanged() {
-        if (this.article.Title != this.originalArticle.Title ||
-            this.article.ShortDescription != this.originalArticle.ShortDescription ||
-            this.article.Year != this.originalArticle.Year ||
-            this.article.Link != this.originalArticle.Link)
-            return true;
+    removeArticleAuthor(index: number) {
+        let control = <FormArray>this.articleForm.controls['Authors'];
+        control.removeAt(index);
+        control.markAsTouched(true);
+        this.articleForm.markAsDirty();
+    }
+    
+    private setFormGroup() {
+        return this.formBuilder.group({
+            'Id': [this.article.Id],
+            'Title': [this.article.Title, Validators.required],
+            'ShortDescription': [this.article.ShortDescription, Validators.required],
+            'Link': [this.article.Link, Validators.required],
+            'Year': [this.article.Year, Validators.compose([Validators.required, Validators.pattern(/^\d{4}$/)])],
+            'Authors': this.formBuilder.array(
+                this.initAuthors(),
+                Validators.compose([Validators.required, Validators.minLength(1)]))
+        });
+    }
 
-        let originalAuthorIds = this.keys(this.originalArticle.Authors);
-        let authorIds = this.keys(this.article.Authors);
+    private initAuthors() {
+        let authors: any[] = [];
+        this.keys(this.article.Authors).forEach((key) => {
+            authors.push(this.formBuilder.group({
+                id: [key],
+                name: [this.article.Authors[key]]
+            }));
+        });
+        return authors;
+    }
 
-        if (authorIds.length != originalAuthorIds.length)
-            return true;
+    private filterAuthorNames(val: string) {
+        let filteredKeys = val ? this.keys(this.authors).filter((key) => new RegExp(val, 'gi').test(this.authors[key])) : this.keys(this.authors);
+        if (filteredKeys.length == 1 && this.authors[filteredKeys[0]].toLowerCase() == val.toLowerCase()) {
+            this.addArticleAuthor(filteredKeys[0]);
+        }
+        return filteredKeys;
 
-        let newAuthors = authorIds.filter(x => !originalAuthorIds.find(y => y == x));
-
-        return newAuthors.length > 0;
     }
 }

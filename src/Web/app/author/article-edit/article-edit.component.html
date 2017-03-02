@@ -1,34 +1,41 @@
 ﻿<h1 md-dialog-title *ngIf="article.Id">Edit article</h1>
 <h1 md-dialog-title *ngIf="!article.Id">Add article</h1>
 <md-dialog-content>
-    <div class="dialog-content">
-        <md-input-container>
-            <input mdInput placeholder="Title" [(ngModel)]="article.Title" required>
+    <form [formGroup]="articleForm" class="dialog-content">
+        <md-input-container class="input-container">
+            <input mdInput placeholder="Title" [formControl]="articleForm.controls['Title']">
+            <md-hint class="invalid-input" *ngIf="articleForm.controls['Title'].hasError('required') && (articleForm.controls['Title'].touched || submitted)">You must include a title.</md-hint>
+        </md-input-container>
+        <md-input-container class="input-container">
+            <textarea mdInput placeholder="Short Description" [formControl]="articleForm.controls['ShortDescription']"></textarea>
+            <md-hint class="invalid-input" *ngIf="articleForm.controls['ShortDescription'].hasError('required') && (articleForm.controls['ShortDescription'].touched || submitted)">You must include a short description.</md-hint>
+        </md-input-container>
+        <md-input-container class="input-container">
+            <input mdInput placeholder="Link" [formControl]="articleForm.controls['Link']">
+            <md-hint class="invalid-input" *ngIf="articleForm.controls['Link'].hasError('required') && (articleForm.controls['Link'].touched || submitted)">You must include a link.</md-hint>
+        </md-input-container>
+        <md-input-container class="input-container">
+            <input mdInput placeholder="Year" [formControl]="articleForm.controls['Year']">
+            <md-hint class="invalid-input" *ngIf="(articleForm.controls['Year'].hasError('required') || articleForm.controls['Year'].hasError('pattern')) && (articleForm.controls['Year'].touched || submitted)">You must include a year.</md-hint>
         </md-input-container>
         <md-input-container>
-            <textarea mdInput placeholder="Short Description" [(ngModel)]="article.ShortDescription" required></textarea>
+            <input type="text" mdInput placeholder="Authors" [mdAutocomplete]="auto" [formControl]="authorsControl">
+            <md-hint class="invalid-input" *ngIf="(articleForm.controls['Authors'].hasError('required') || articleForm.controls['Authors'].hasError('miLength')) && (articleForm.controls['Authors'].touched || submitted)">You must include at least one author.</md-hint>
         </md-input-container>
-        <md-input-container>
-            <input mdInput placeholder="Link" [(ngModel)]="article.Link" required>
-        </md-input-container>
-        <md-input-container>
-            <input mdInput minlength="4" maxlength="4" placeholder="Year" [(ngModel)]="article.Year" required>
-        </md-input-container>
-        <md-select placeholder="Author" (change)="addArticleAuthor($event.value)">
-            <md-option *ngFor="let key of keys(authors)" [value]="key">
-                {{ authors[key]}}
+        <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let key of filteredAuthors | async" [value]="authors[key]">
+                {{ authors[key] }}
             </md-option>
-        </md-select>
-        <md-chip-list class="author-chip-list">
-            <md-chip class="author-chip" *ngFor="let key of keys(article.Authors)">
+        </md-autocomplete>
+        <md-chip-list>
+            <md-chip class="author-chip" *ngFor="let author of articleForm.controls.Authors.controls; let i=index">
                 <div class="chip-content"> 
-                    <span>{{article.Authors[key]}}</span>
-                    <md-icon *ngIf="authorId != key && keys(article.Authors).length > 1" (click)="removeArticleAuthor(key)">clear</md-icon>
+                    <span>{{author.value.name}}</span>
+                    <md-icon (click)="removeArticleAuthor(i)">clear</md-icon>
                 </div>
             </md-chip>
         </md-chip-list>
-    </div>
-    <span *ngIf="errorMessage" class="error-message">{{errorMessage}}</span>
+    </form>
 </md-dialog-content>
 
 <md-dialog-actions>

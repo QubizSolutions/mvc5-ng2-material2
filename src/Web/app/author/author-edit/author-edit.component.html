@@ -12,7 +12,7 @@
         </md-input-container>
         <md-input-container class="input-container">
             <input mdInput type="date" placeholder="Birth Date" [formControl]="authorForm.controls['BirthDate']">
-            <md-hint class="invalid-input" *ngIf="(authorForm.controls['BirthDate'].hasError('required') || authorForm.controls['BirthDate'].hasError('pattern')) && (authorForm.controls['BirthDate'].touched || submitted)">You must include a birth name.</md-hint>
+            <md-hint class="invalid-input" *ngIf="(authorForm.controls['BirthDate'].hasError('required') || authorForm.controls['BirthDate'].hasError('pattern')) && (authorForm.controls['BirthDate'].touched || submitted)">You must include a birth date.</md-hint>
         </md-input-container>
         <md-input-container class="input-container">
             <input mdInput placeholder="Country" [formControl]="authorForm.controls['Country']">

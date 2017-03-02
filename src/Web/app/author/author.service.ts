@@ -16,7 +16,7 @@ export class AuthorService {
             .catch(this.httpUtilityService.handleError);
     }
 
-    getAuthorNames(): Observable<{ [id: number]: string; }[]> {
+    getAuthorNames(): Observable<{ [id: number]: string; }> {
 
         return this.http.get(`${this.url}/GetAuthorNames`)
             .map(this.httpUtilityService.extractData)

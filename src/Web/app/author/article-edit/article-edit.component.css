@@ -1,9 +1,15 @@
 ﻿.article-card{
     margin-bottom: 15px;
 }
-.author-chip-list{
-    min-height: 50px;
+
+.input-container{
+    margin-bottom: 10px;
 }
+
+.invalid-input{
+    color: #f44336;
+}
+
 .author-chip{
     margin-top: 10px;
     margin-right: 5px;
